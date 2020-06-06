@@ -78,6 +78,7 @@ LG_to_Ch<-function(lg="L"){
 }
 ########
 #se function,calculate standard this a test github
+#
 #######
 se<-function(v=c(2,3,4,5,2,3,5)){
   mysd<-sd(v,na.rm=TRUE)
