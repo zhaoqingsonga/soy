@@ -1,0 +1,32 @@
+===== 2016/2/18 11:23:29: Job 'rsoy': SYNC started by User on computer 'THINKPAD-PC' =====
+rsoy: C:\Users\thinkpad\Documents\soy <-> E:\360yunpan\R_WD360\soy, SavePrevVers, CleanupPrevVers=30d, CleanupOldGens=12m, TmpDest, EstReq, CopyLocked, DetectMovesAndRenames, DetectFolderMoves, FileLinksDrill, Reconnect=3, ChangeLimit=10
+Locking folder C:\Users\thinkpad\Documents\soy for write
+Locking folder E:\360yunpan\R_WD360\soy for write
+Delete File 'E:\360yunpan\R_WD360\soy\R\inputdata.R' (User Action)
+Sync State: /.Rbuildignore
+Sync State: /.RData
+Copy Over 'C:\Users\thinkpad\Documents\soy\.Rhistory' -> 'E:\360yunpan\R_WD360\soy\.Rhistory' (User Action)
+Sync State: /DESCRIPTION
+Sync State: /man
+Sync State: /man/hello.Rd
+Sync State: /NAMESPACE
+Sync State: /pingshu.R
+Sync State: /R
+Sync State: /R/comindex.R
+Copy New 'C:\Users\thinkpad\Documents\soy\R\getdata.R' -> 'E:\360yunpan\R_WD360\soy\R\getdata.R'
+Sync State: /R/hello.R
+Sync State: /R/trans.R
+Copy Over 'C:\Users\thinkpad\Documents\soy\R\yield.R' -> 'E:\360yunpan\R_WD360\soy\R\yield.R' (User Action)
+Close Modified Folder (mod-time, acl): /R
+Sync State: /sink.txt
+Sync State: /soy.Rproj
+Sync State: /test.docx
+Sync State: /test.html
+Copy Over 'C:\Users\thinkpad\Documents\soy\test.Rmd' -> 'E:\360yunpan\R_WD360\soy\test.Rmd' (User Action)
+Save State File C:\Users\thinkpad\Documents\soy\_gsdata_\_file_state_v4._gs
+Save State File E:\360yunpan\R_WD360\soy\_gsdata_\_file_state_v4._gs
+Items Synced OK: 20, Errors: 
+===== 2016/2/18 11:23:31: Sync Completed. Time: 00:00:02, Speed: 156 KB/s =====
+Unlocking folder (set insync file) C:\Users\thinkpad\Documents\soy\_gsdata_\_insync_v4.gsl
+Unlocking folder (set insync file) E:\360yunpan\R_WD360\soy\_gsdata_\_insync_v4.gsl
+

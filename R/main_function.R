@@ -1,6 +1,6 @@
 #######################################################################
 # get repeat that has no duplicated data among the same position number
-# finished on 2020.5.11
+# finished on 2020.5.11 githubtest
 #######################################################################
 
 get_rp3<-function(test1=1:15){
@@ -88,5 +88,9 @@ se<-function(v=c(2,3,4,5,2,3,5)){
   return(mysd/sqrt(myn))
 }
 ##
+
+gitfunction<-function(){
+  return("Hello world!")
+}
 
 

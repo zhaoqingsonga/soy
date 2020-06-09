@@ -1,0 +1,205 @@
+---
+output: word_document
+---
+```{r,echo=FALSE,message=FALSE}
+library("agricolae")
+#################主要参数############
+
+#当年
+currYear<-2014
+#随机区组试验设计，
+sysj<-"随机区组"
+#重复  
+cf<-3
+#行长6m
+hc<-6
+#6行区。
+hq<-6
+#株距cm，
+zj<-9
+#密度万株/亩。
+#md<-round(100/zj*1332,1)
+#小区拔`r bdz`株
+bdz<-15
+#试验地点
+sydd<-c("河北省石家庄市藁城市堤上国家黄淮海转基因大豆中试与产业化基地")
+#田间调查
+tjdc<-c("播种期","出苗期","开花期","花色","叶形","抗病性","抗倒性","成熟期","田间总评")
+#室内考种
+snkz<-c("株高（cm）","底荚高（cm）","分枝数","主茎节数","单株有效荚","单株无效荚","粒形","粒色","脐色","单株粒重","百粒重")
+#########The main origin data##########
+currYear=2015
+sy<-mysqldata(tableName = "experiments",nf=currYear)
+gs<-subset(sy,fac3=='石家庄'& symcy=="LJHHBZ")
+###########################################
+##########modify the  yield data###########
+###########################################
+####CK:add 1kg for xqz
+#############################################
+
+###################################################
+#this function can translate field code to Chinese#
+###################################################
+transF<-function(bt=bt){
+  fieldzydz<-c("ID","编号","id","编号","nf","年份","hh","行号","cf","重复","s_name","品系",
+               "i_name","鉴定", "bzq","播种期","khq","开花期", "tpmq","田评苗期",
+               "tphq","田评花期","tpglq","田评鼓粒期","tpcsq","田评成熟期","hs","花色",
+               "kdf","抗倒伏","csq","成熟期","qz","区组","kzzs","考种株数","jjxx","结荚习性",
+               "rms","茸毛色",   "jss","荚熟色","zg","株高cm","djg","底荚高cm","fzs","分枝数",
+               "zjjs","主茎节数","yxj","有效荚","wxj","无效荚","zzpj","籽粒评价",
+               "lx","粒形","zps","种皮色","qs","脐色","zpgz","种皮光泽","blz1","百粒重g",
+               "blz2","百粒重2","hb","褐斑","cs","虫食","zlpj","籽粒评价","xqmj","小区面积m2",
+               "kzzlz","考种株粒重g","xqz","小区重kg","db","蛋白","zf","脂肪","qx","去向",
+               "cl","亩产kg","syq","生育期","a_name","观察","l_hh","行","shds","收获袋(120粒)","zz",
+               "总重g","xd","选单","ma","母本","pa","父本","zhs","做花数","chjs","成活荚数","zjls","杂交粒数",
+               "cms","成苗数","zjy","含基因","c_name","组合","fac1","联鉴编号","fac11","育成单位","fac2","品系",
+               "fac3","试验点"
+               )
+  for(i in 1:length(bt))
+  {
+    if(length(grep(bt[i],fieldzydz))>=1)
+    {
+      bt[i]<-fieldzydz[grep(bt[i],fieldzydz)[1]+1]
+      }
+  }
+  return(bt)
+}
+```
+
+---
+title: "`r currYear`年转基因联合鉴定试验总结"
+author: "zqs"
+date: "`r Sys.Date()`"
+---
+##1.	试验目的##
+
+根据往年抗除草剂转基因新品系比较结果，选出产量高、综合抗性好的品系进行联合鉴定试验。目的是为了筛选适合于黄淮海区域种植的转基因大豆新品种。
+
+##2.	试验材料##
+
+总共有`r  nrow(gs)/max(gs$cf)`个材料参加联合鉴定试验（包括对照），对照品种为`r as.matrix(gs$fac2[grep("CK1",gs$fac2)][1])` 。
+
+表1 参试材料
+
+[查看](E:/360yunpan/Routput/lhjdsjzcscl`r gs$nf[1]`.xlsx)
+```{r,echo=FALSE,message=FALSE}
+cscl<-subset(gs,cf==1)
+cscl<-cscl[biaotouj]
+names(cscl)<-transF(names(cscl))
+write.xlsx(cscl,paste("E:/360yunpan/Routput/lhjdsjzcscl",gs$nf[1],".xlsx",sep=""))
+```
+
+##3.	试验方法##
+
+###3.1	种植方法###
+
+`r sysj`试验设计，`r cf`次重复，行长`r hc`m，`r hq`行区。株距`r zj`cm，密度`r round(100/zj*0.1332,1)`万株/亩。
+
+###3.2	收获方法###
+
+小区拔`r bdz`株室内考种，剩余全部收获测产。
+
+##4.	试验地及田间管理措施##
+
+###4.1	试验地要求###
+
+地势平坦，土壤肥力好，地力均匀。
+
+###4.2	试验地点###
+
+试验地点设于`r sydd`。
+
+###4.3	播种期###
+
+播种期`r  gs$bzq[1]`。
+
+###4.4	田间管理措施###
+
+大豆出苗后及时查苗、补苗、定苗。苗期及时中耕培土。大豆生长季节应注意防治病虫害，及时除草。大豆开花结荚及鼓粒期迂旱应浇水，遇涝应排水。大豆成熟时应及时收获，收获后及时晾晒、脱粒。
+
+##5.	田间调查、室内考种项目及品质检测##
+
+###5.1	田间调查###
+
+田间调查性状包括：`r tjdc`。
+
+###5.2	室内考种###
+
+室内考种主要包括：`r snkz`。
+
+###5.3	品质测定###
+
+利用近红外线分析仪检测蛋白质、脂肪含量。
+
+##6.	试验结果##
+
+###6.1	产量结果分析###
+
+石家庄地点品系产量
+
+```{r,echo=FALSE,message=FALSE}
+exYield<-re_yield_ex(data=gs)
+exYnock<-exYield[-grep("CK",rownames(exYield)),]
+cspxs<-nrow(exYnock)
+cks<-length(grep("CK",rownames(exYield)))
+pjmc<-mean(exYield$`亩产(kg)`)
+ckmc<-exYield$`亩产(kg)`[grep("CK1",rownames(exYield))] 
+zc0<-nrow(exYnock[exYnock$`增产%`>0,])
+zc5<-nrow(exYnock[exYnock$`增产%`>=5,])
+zc5list<-rownames(exYnock[exYnock$`增产%`>=5,])
+highyield<-max(exYnock$`亩产(kg)`)
+highpx<-rownames(exYnock)[which.max(exYnock$`亩产(kg)`)]
+overck<-exYnock$`增产%`[which.max(exYnock$`亩产(kg)`)]
+```
+
+参试的`r cspxs`个品系（不包括对照）平均亩产`r pjmc`kg。对照品种亩产`r ckmc`kg，产量超对照的品系有`r zc0`个，产量超对照5%以上品系有`r zc5`个（`r zc5list`），产量最高的品系是`r highpx`，亩产`r highyield`kg，超对照`r overck`%。
+
+表2 产量结果分析
+
+[查看](E:/360yunpan/Routput/lhjdsjzcl`r gs$nf[1]`.xlsx)
+
+```{r,echo=FALSE,message=FALSE}
+write.xlsx(exYield,paste("E:/360yunpan/Routput/lhjdsjzcl",gs$nf[1],".xlsx",sep=""))
+```
+##7.	品系评述##
+```{r echo=FALSE,message=FALSE}
+  pingshu(ps)
+
+```
+
+##8. 考种信息##
+
+表3 田间调查表
+
+[查看](E:/360yunpan/Routput/lhjdsjztj`r gs$nf[1]`.xlsx)
+```{r,echo=FALSE,message=FALSE}
+tj<-gs[c(biaotouj,tianjian)]
+names(tj)<-transF(names(tj))
+write.xlsx(tj,paste("E:/360yunpan/Routput/lhjdsjztj",gs$nf[1],".xlsx",sep=""))
+
+```
+
+表4 植株考种表
+
+[查看](E:/360yunpan/Routput/lhjdsjzzz`r gs$nf[1]`.xlsx)
+```{r,echo=FALSE,message=FALSE}
+zz<-cbind(gs[c(biaotouj,zhizhu1)],gs[quan2]/gs$kzzs)
+zz<-zz[-grep("kzzs",names(zz))]
+names(zz)<-transF(names(zz))
+write.xlsx(zz,paste("E:/360yunpan/Routput/lhjdsjzzz",gs$nf[1],".xlsx",sep=""))
+
+```
+
+表5 籽粒考种表
+
+[查看](E:/360yunpan/Routput/lhjdsjzzl`r gs$nf[1]`.xlsx)
+```{r,echo=FALSE,message=FALSE}
+zl<-gs[c(biaotouj,zili)]
+names(zl)<-transF(names(zl))
+write.xlsx(zl,paste("E:/360yunpan/Routput/lhjdsjzzl",gs$nf[1],".xlsx",sep=""))
+```
+
+
+
+
+
