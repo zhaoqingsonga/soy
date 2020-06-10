@@ -90,7 +90,7 @@ se<-function(v=c(2,3,4,5,2,3,5)){
 ##
 
 gitfunction<-function(){
-  return("Hello world!")
+  return("Hello world----!")
 }
 
 
